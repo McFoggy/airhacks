@@ -11,6 +11,7 @@ import javax.security.enterprise.identitystore.CredentialValidationResult;
 import javax.security.enterprise.identitystore.IdentityStoreHandler;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -23,6 +24,7 @@ public class PasswordAuthenticationMechanism implements HttpAuthenticationMechan
 
     @Override
     public AuthenticationStatus validateRequest(HttpServletRequest request, HttpServletResponse response, HttpMessageContext httpMessageContext) throws AuthenticationException {
+        HttpSession session = request.getSession(true);
         String user = request.getParameter("user");
         String password = request.getParameter("password");
         if (user == null || password == null)
